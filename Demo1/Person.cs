@@ -16,6 +16,10 @@ namespace Demo1
         {
             return a > b ? a - b : b - a;
         }
+        public int Multiply(int a,int b)
+        {
+            return a * b;
+        }
 
     }
 }

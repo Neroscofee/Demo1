@@ -20,6 +20,7 @@ namespace Demo1
             Console.WriteLine(xm.Value);
 
             Console.WriteLine(xm.Add(4, 7));
+            Console.WriteLine(xm.Multiply(5, 7));
             Console.ReadKey();
         }
     }
