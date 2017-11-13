@@ -49,12 +49,15 @@ namespace Demo1
             tree.PostOrderTraversalEx();
 
 
-            Trace.WriteLine("--逐层--队列--");
-            tree.Traversal();
+            //Trace.WriteLine("--逐层--队列--");
+            //tree.Traversal();
 
-            Trace.WriteLine("--反转二叉树--");
-            BinaryTreeNode<int> treeReverse = tree.ReverseEx();
-            treeReverse.Traversal();
+            //Trace.WriteLine("--反转二叉树--");
+            //BinaryTreeNode<int> treeReverse = tree.ReverseEx();
+            //treeReverse.Traversal();
+
+            Trace.WriteLine("--逐层--栈--");
+            tree.TraversalEx();
 
             //BinaryTreeNode<int> tree = new BinaryTreeNode<int>("0");//rootNode
             //BinaryTreeNode<int> n01 = tree.CreateAndJoinLeft("01");

@@ -167,7 +167,7 @@ namespace Demo1
             }
         }
         /// <summary>
-        /// 逐层遍历
+        /// 逐层遍历 队列
         /// </summary>
         public void Traversal()
         {
@@ -176,7 +176,7 @@ namespace Demo1
                 return;
             }
             Queue<BinaryTreeNode<T>> queue = new Queue<BinaryTreeNode<T>>();
-            queue.Enqueue(this);
+            queue.Enqueue(this);//把根节点放到队列里
             while (queue.Any())//如果队列里有值
             {
                 BinaryTreeNode<T> node = queue.Dequeue();//队列是先进先出，所以这里移除并返回队列最前端的元素
@@ -192,7 +192,7 @@ namespace Demo1
             }
         }
         /// <summary>
-        /// 逐层遍历 非递归
+        /// 逐层遍历 栈
         /// </summary>
         public void TraversalEx()
         {
