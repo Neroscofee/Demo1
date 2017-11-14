@@ -167,7 +167,8 @@ namespace Demo1
             }
         }
         /// <summary>
-        /// 逐层遍历
+        /// 逐层遍历 队列
+        /// 队列与栈 ---- 广度优先搜索使用队列 深度优先搜索使用栈
         /// </summary>
         public void Traversal()
         {
@@ -176,7 +177,7 @@ namespace Demo1
                 return;
             }
             Queue<BinaryTreeNode<T>> queue = new Queue<BinaryTreeNode<T>>();
-            queue.Enqueue(this);
+            queue.Enqueue(this);//把根节点放到队列里
             while (queue.Any())//如果队列里有值
             {
                 BinaryTreeNode<T> node = queue.Dequeue();//队列是先进先出，所以这里移除并返回队列最前端的元素
@@ -192,26 +193,221 @@ namespace Demo1
             }
         }
         /// <summary>
-        /// 逐层遍历 非递归
+        /// 逐层遍历 栈
         /// </summary>
-        public void TraversalEx()
+        /// 
+        public void TraversalStack(Stack<BinaryTreeNode<T>> stack)
         {
-            Stack<BinaryTreeNode<T>> stack = new Stack<BinaryTreeNode<T>>();
-            stack.Push(this);
+            Stack<BinaryTreeNode<T>> newstack = new Stack<BinaryTreeNode<T>>();
             while (stack.Count > 0)
             {
                 BinaryTreeNode<T> temp = stack.Peek();
-                Trace.WriteLine(temp.Name);
-                temp = stack.Pop();
-                if (temp.Left !=null)
+                if (temp.Left != null)
                 {
-                    stack.Push(temp.Left);
+                    newstack.Push(temp.Left);
+                    Console.WriteLine(temp.Left.Name);
                 }
                 if (temp.Right != null)
                 {
-                    stack.Push(temp.Right);
+                    newstack.Push(temp.Right);
+                    Console.WriteLine(temp.Right.Name);
+                }
+                stack.Pop();
+            }
+            Stack<BinaryTreeNode<T>> oldstack = new Stack<BinaryTreeNode<T>>();
+            while (newstack.Count > 0)
+            {
+                BinaryTreeNode<T> node = newstack.Peek();
+                oldstack.Push(node);
+                newstack.Pop();
+            }
+            if (oldstack.Count > 0)
+            {
+                TraversalStack(oldstack);
+            }
+        }
+        public void Stack()
+        {
+            Stack<BinaryTreeNode<T>> stack = new Stack<BinaryTreeNode<T>>();
+            stack.Push(this);
+            Console.WriteLine(this.Name);
+            //Stack<BinaryTreeNode<T>> tempStack = new Stack<BinaryTreeNode<T>>();
+            //while (stack.Count > 0)
+            //{
+            //    BinaryTreeNode<T> temp;
+            //    temp = stack.Peek();
+            //    temp = stack.Pop();
+            //    if (temp.Left != null)
+            //    {
+            //        tempStack.Push(temp.Left);
+            //        Console.WriteLine(temp.Left.Name);
+            //    }
+            //    if (temp.Right != null)
+            //    {
+            //        tempStack.Push(temp.Right);
+            //        Console.WriteLine(temp.Right.Name);
+            //    }
+            //}
+
+            int cur = 0;
+            int last = 1;
+            while (cur < stack.Count)
+            {
+                last = stack.Count;
+                while (cur < last)
+                {
+                    BinaryTreeNode<T> temp = stack.Peek();//返回栈顶值且不移出栈
+                    //Trace.WriteLine(temp.Name);
+                    temp = stack.Pop();
+                    if (temp.Left != null)
+                    {
+                        stack.Push(temp.Left);
+                        Console.WriteLine(temp.Left.Name);
+                    }
+                    if (temp.Right != null)
+                    {
+                        stack.Push(temp.Right);
+                        Console.WriteLine(temp.Right.Name);
+                    }
+                    cur++;
                 }
             }
+            Console.ReadKey();
+        }
+
+        public void TraversalEx()
+        {
+            Stack<BinaryTreeNode<T>> stack = new Stack<BinaryTreeNode<T>>();//实例化二叉树的泛型对象
+            stack.Push(this);//把根节点的值压入栈里
+            Console.WriteLine(this.Name);
+            bool single = false;
+            Stack<BinaryTreeNode<T>> tempStack = new Stack<BinaryTreeNode<T>>();
+            while (stack.Count > 0 || tempStack.Count > 0)
+            {
+
+                //if (!single)
+                //{
+                //    BinaryTreeNode<T> temp = stack.Peek();//返回栈顶值且不移出栈
+                //    Trace.WriteLine(temp.Name);
+                //    temp = stack.Pop();
+                //}
+                //else
+                //{
+                //    BinaryTreeNode<T> temp = tempStack.Peek();//返回栈顶值且不移出栈
+                //    Trace.WriteLine(temp.Name);
+                //    temp = tempStack.Pop();
+                //}
+
+                BinaryTreeNode<T> temp;
+                if (!single)
+                {
+                    temp = stack.Peek();
+                }
+                else
+                {
+                    temp = tempStack.Peek();
+                }
+                // !single ? stack.Peek() : tempStack.Peek();//返回栈顶值且不移出栈
+                //Trace.WriteLine(temp.Name);
+                //Console.WriteLine(temp.Name);
+                //temp = !single ? stack.Pop() : tempStack.Pop();
+                if (!single)
+                {
+                    temp = stack.Pop();
+                }
+                else
+                {
+                    temp = tempStack.Pop();
+                }
+                if (temp.Right != null)
+                {
+                    if (stack.Count == 0 && (tempStack.Count == 2 || tempStack.Count == 1))
+                    {
+                        stack.Push(temp.Right);
+                        Console.WriteLine(temp.Name);
+                        single = false;
+                    }
+                    else
+                    {
+                        tempStack.Push(temp.Right);
+                        Console.WriteLine(temp.Name);
+                        single = true;
+                    }
+                }
+                if (temp.Left != null)
+                {
+                    if (stack.Count == 1 && (tempStack.Count == 2 || tempStack.Count == 1))
+                    {
+                        stack.Push(temp.Left);
+                        Console.WriteLine(temp.Name);
+                        single = false;
+                    }
+                    else
+                    {
+                        tempStack.Push(temp.Left);
+                        Console.WriteLine(temp.Name);
+                        single = true;
+                    }
+                }
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+            //while (stack.Count > 0)//如果栈不为空
+            //{
+            //    BinaryTreeNode<T> temp = stack.Peek();//返回栈顶元素且不移出栈
+            //    Trace.WriteLine(temp.Name);//打印栈顶元素的值
+            //    stack.Pop();//移除栈顶元素
+            //    if (temp.Right != null)//如果右子节点不为空
+            //    {
+            //        stack.Push(temp.Right);//压入栈内
+            //    }
+            //    if (temp.Left != null)//如果做左子节点不为空
+            //    {
+            //        stack.Push(temp.Left);//压入栈内
+            //    }
+            //}
+
+
+
+
+
+
+            //int cur = 0;
+            //int last = 1;
+            //while (cur < stack.Count)
+            //{
+            //    last = stack.Count;
+            //    while (cur < last)
+            //    {
+            //        BinaryTreeNode<T> temp = stack.Peek();//返回栈顶值且不移出栈
+            //        Trace.WriteLine(temp.Name);
+            //        temp = stack.Pop();
+            //        if (temp.Left != null)
+            //        {
+            //            stack.Push(temp.Left);
+            //        }
+            //        if (temp.Right != null)
+            //        {
+            //            stack.Push(temp.Right);
+            //        }
+            //        cur++;
+            //    }
+            //}
+
+
+
+
         }
         /// <summary>
         /// 反转二叉树 递归

@@ -12,17 +12,17 @@ namespace Demo1
     {
         static void Main(string[] args)
         {
-            Person xm, xn;
-            xm = new Person();
-            xm.Value = 6;
-            xn = xm;
-            Console.WriteLine(xn.Value);
-            xn.Value = 9;
-            Console.WriteLine(xm.Value);
+            //Person xm, xn;
+            //xm = new Person();
+            //xm.Value = 6;
+            //xn = xm;
+            //Console.WriteLine(xn.Value);
+            //xn.Value = 9;
+            //Console.WriteLine(xm.Value);
 
-            Console.WriteLine(xm.Add(4, 7));
-            Console.WriteLine(xm.Multiply(5, 7));
-            Console.ReadKey();
+            //Console.WriteLine(xm.Add(4, 7));
+            //Console.WriteLine(xm.Multiply(5, 7));
+            //Console.ReadKey();
 
             BinaryTreeNode<int> tree = new BinaryTreeNode<int>("0");
             BinaryTreeNode<int> n01 = tree.CreateAndJoinLeft("01");
@@ -52,9 +52,20 @@ namespace Demo1
             Trace.WriteLine("--逐层--队列--");
             tree.Traversal();
 
-            Trace.WriteLine("--反转二叉树--");
-            BinaryTreeNode<int> treeReverse = tree.ReverseEx();
-            treeReverse.Traversal();
+            //Trace.WriteLine("--反转二叉树--");
+            //BinaryTreeNode<int> treeReverse = tree.ReverseEx();
+            //treeReverse.Traversal();
+
+            Trace.WriteLine("--逐层--栈--");
+            //tree.TraversalEx();
+            //tree.Stack();
+
+            Stack<BinaryTreeNode<int>> ss = new Stack<BinaryTreeNode<int>>();
+            ss.Push(tree);
+            Console.WriteLine(tree.Name);
+            tree.TraversalStack(ss);
+            Console.ReadKey();
+
 
             //BinaryTreeNode<int> tree = new BinaryTreeNode<int>("0");//rootNode
             //BinaryTreeNode<int> n01 = tree.CreateAndJoinLeft("01");
