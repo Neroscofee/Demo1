@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Demo1.Interface;
+using Demo1.Practice;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -24,6 +26,35 @@ namespace Demo1
             //Console.WriteLine(xm.Multiply(5, 7));
             //Console.ReadKey();
 
+            //BinaryTreeNode<int> tree = new BinaryTreeNode<int>("0");//rootNode
+            //BinaryTreeNode<int> n01 = tree.CreateAndJoinLeft("01");
+            //BinaryTreeNode<int> n02 = tree.CreateAndJoinRight("02");
+            //BinaryTreeNode<int> n011 = n01.CreateAndJoinLeft("011");
+            //BinaryTreeNode<int> n012 = n01.CreateAndJoinRight("012");
+            //BinaryTreeNode<int> n021 = n02.CreateAndJoinLeft("021");
+            //BinaryTreeNode<int> n0211 = n021.CreateAndJoinLeft("0211");
+            //BinaryTreeNode<int> n0212 = n021.CreateAndJoinRight("0212");
+
+            ////遍历输出
+            //tree.Traversal();
+
+            //Program p = new Program();
+            //p.BinaryTree();
+
+            Profession p = new Profession();
+            p.StartCombat(new Priest());
+            p.StartCombat(new Rogue());
+            p.StartCombat(new Mage());
+
+            Zoo zoo = new Zoo();
+            zoo.Show(new Dog());
+            zoo.Show(new Cat());
+            zoo.Show(new Monkey());
+
+        }
+
+        void BinaryTree()
+        {
             BinaryTreeNode<int> tree = new BinaryTreeNode<int>("0");
             BinaryTreeNode<int> n01 = tree.CreateAndJoinLeft("01");
             BinaryTreeNode<int> n02 = tree.CreateAndJoinRight("02");
@@ -65,21 +96,7 @@ namespace Demo1
             Console.WriteLine(tree.Name);
             tree.TraversalStack(ss);
             Console.ReadKey();
-
-
-            //BinaryTreeNode<int> tree = new BinaryTreeNode<int>("0");//rootNode
-            //BinaryTreeNode<int> n01 = tree.CreateAndJoinLeft("01");
-            //BinaryTreeNode<int> n02 = tree.CreateAndJoinRight("02");
-            //BinaryTreeNode<int> n011 = n01.CreateAndJoinLeft("011");
-            //BinaryTreeNode<int> n012 = n01.CreateAndJoinRight("012");
-            //BinaryTreeNode<int> n021 = n02.CreateAndJoinLeft("021");
-            //BinaryTreeNode<int> n0211 = n021.CreateAndJoinLeft("0211");
-            //BinaryTreeNode<int> n0212 = n021.CreateAndJoinRight("0212");
-
-            ////遍历输出
-            //tree.Traversal();
-
-
         }
+
     }
 }

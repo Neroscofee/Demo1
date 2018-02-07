@@ -42,7 +42,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryTreeNode.cs" />
+    <Compile Include="Interface\Mage.cs" />
+    <Compile Include="Interface\Priest.cs" />
+    <Compile Include="Interface\Profession.cs" />
+    <Compile Include="Interface\Rogue.cs" />
+    <Compile Include="Interface\Role.cs" />
     <Compile Include="Person.cs" />
+    <Compile Include="Practice\Animal.cs" />
+    <Compile Include="Practice\Cat.cs" />
+    <Compile Include="Practice\Dog.cs" />
+    <Compile Include="Practice\Monkey.cs" />
+    <Compile Include="Practice\Zoo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
