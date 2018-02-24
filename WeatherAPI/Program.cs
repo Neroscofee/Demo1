@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace WeatherAPI
 {
@@ -26,8 +27,23 @@ namespace WeatherAPI
             parameters1.Add("key", appkey);
             string result1 = sendPost(url1,parameters1,"GET");
             //JsonObject newObj1 = new JsonObject(result1);
+            JsonSerializer serializer = new JsonSerializer();
+            StringReader sr = new StringReader(result1);
+            object o = serializer.Deserialize(new JsonTextReader(sr), typeof(WeatherInfo));
+            WeatherInfo info = o as WeatherInfo;
+            var resultcode = info.resultcode;
+            var reason = info.reason;
+            Result result = info.result;
+            SK skInfo = result.sk;
+            int temp = skInfo.temp;
+            string s1 = skInfo.wind_direction;
+            string s2 = skInfo.wind_strength;
+            string s3 = skInfo.humidity;
+            string s4 = skInfo.time;
 
-            
+
+
+
 
 
 
