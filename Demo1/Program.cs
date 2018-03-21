@@ -50,7 +50,8 @@ namespace Demo1
             zoo.Show(new Dog());
             zoo.Show(new Cat());
             zoo.Show(new Monkey());
-
+            
+            
         }
 
         void BinaryTree()

@@ -2,33 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Demo1.Practice
+namespace Algorithm
 {
-    class Zoo
+    public class Sort
     {
-        //public void Show(Dog dog)
-        //{
-        //    dog.LikeFood();
-        //}
-        //public void Show(Cat cat)
-        //{
-        //    cat.LikeFood();
-        //}
-        //public void Show(Monkey monkey)
-        //{
-        //    monkey.LikeFood();
-        //}
-        public void Show(Animal animal)
-        {
-            animal.LikeFood();
-        }
-
-        public void QuickSort(int[] a, int left, int right)
+        public static int[] QuickSort(int[] a, int left, int right)
         {
             if (left > right)
             {
-                return;
+                return a;
             }
             int i = left;
             int j = right;
@@ -49,6 +33,26 @@ namespace Demo1.Practice
             a[i] = key;
             QuickSort(a, left, i - 1);
             QuickSort(a, i + 1, right);
+            return a;
         }
+
+        public int[] BubbleSort(int[] a)
+        {
+            int temp = 0;
+            for (int i = 0; i < a.Length - 1; i++)
+            {
+                for (int j = 0; j < a.Length - 1 - i; j++)
+                {
+                    if (a[j] < a[j + 1])
+                    {
+                        temp = a[j];
+                        a[j] = a[j + 1];
+                        a[j + 1] = temp;
+                    }
+                }
+            }
+            return a;
+        }
+
     }
 }

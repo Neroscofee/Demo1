@@ -20,6 +20,5 @@ namespace Demo1
         {
             return a * b;
         }
-
     }
 }

@@ -40,7 +40,7 @@ namespace WeatherAPI
             string s2 = skInfo.wind_strength;
             string s3 = skInfo.humidity;
             string s4 = skInfo.time;
-
+            
 
 
 
