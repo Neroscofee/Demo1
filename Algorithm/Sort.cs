@@ -54,5 +54,24 @@ namespace Algorithm
             return a;
         }
 
+        public int SimpleCut(int a)
+        {
+            if (a / 10 == 0)
+            {
+                return a;
+            }
+            int sum = 0;
+            while (a > 0)
+            {
+                sum = sum + a % 10;
+                a = a / 10;
+            }
+            if (sum / 10 > 0)
+            {
+                sum = SimpleCut(sum);
+            }
+            return sum;
+        }
+
     }
 }
