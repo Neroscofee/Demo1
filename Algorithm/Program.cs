@@ -16,6 +16,7 @@ namespace Algorithm
             var t2 = s.BubbleSort(array);
             int a = s.SimpleCut(38);
             
+            
         }
 
         void BubbleSort()
