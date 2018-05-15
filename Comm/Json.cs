@@ -197,7 +197,7 @@ namespace Comm
                         break;
                 }
             }
-            return sb.ToString();
+            return sb.ToString();//
         }
 
 
