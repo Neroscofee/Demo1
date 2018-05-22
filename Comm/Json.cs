@@ -5,6 +5,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Comm
 {
@@ -18,15 +22,15 @@ namespace Comm
         /// <param name="list"></param>
         /// <param name="jsonName"></param>
         /// <returns></returns>
-        public static string ListToJson<T>(IList<T> list,string jsonName)
+        public static string ListToJson<T>(IList<T> list, string jsonName)
         {
             StringBuilder Json = new StringBuilder();
             if (string.IsNullOrEmpty(jsonName))
             {
                 jsonName = list[0].GetType().Name;
             }
-            Json.Append("{\""+jsonName+"\":[");
-            if (list.Count >0)
+            Json.Append("{\"" + jsonName + "\":[");
+            if (list.Count > 0)
             {
                 for (int i = 0; i < list.Count; i++)
                 {
@@ -37,13 +41,13 @@ namespace Comm
                     {
                         Type type = pi[j].GetValue(list[i], null).GetType();
                         Json.Append("\"" + pi[j].Name.ToString() + "\":" + StringFormat(pi[j].GetValue(list[i], null).ToString(), type));
-                        if (j < pi.Length-1)
+                        if (j < pi.Length - 1)
                         {
                             Json.Append(",");
                         }
                     }
                     Json.Append("}");
-                    if (i < list.Count-1)
+                    if (i < list.Count - 1)
                     {
                         Json.Append(",");
                     }
@@ -84,7 +88,7 @@ namespace Comm
                     Type type = dt.Columns[j].DataType;
                     jsonString.Append("\"" + strKey + "\":");
                     strValue = StringFormat(strValue, type);
-                    if (j<dt.Columns.Count-1)
+                    if (j < dt.Columns.Count - 1)
                     {
                         jsonString.Append(strValue + ",");
                     }
@@ -120,23 +124,15 @@ namespace Comm
             return jsonString + "}";//111
         }
 
-
-
-
-        #endregion
-
-
-
-
         /// <summary>
         /// 格式化字符型、日期型、布尔型
         /// </summary>
         /// <param name="str"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        private static string StringFormat(string str,Type type)
+        private static string StringFormat(string str, Type type)
         {
-            if (type != typeof(string) && string.IsNullOrEmpty(str) )
+            if (type != typeof(string) && string.IsNullOrEmpty(str))
             {
                 str = "\"" + str + "\"";
             }
@@ -199,6 +195,97 @@ namespace Comm
             }
             return sb.ToString();//
         }
+
+
+        #endregion
+
+
+        #region 实体Json互转
+
+        /// <summary>
+        /// 把对象序列化成Json字符串
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static string GetJson<T>(T obj)
+        {
+            DataContractJsonSerializer json = new DataContractJsonSerializer(typeof(T));
+            using (MemoryStream ms = new MemoryStream())
+            {
+                json.WriteObject(ms, obj);
+                string szJson = Encoding.UTF8.GetString(ms.ToArray());
+                return szJson;
+            }
+        }
+        /// <summary>
+        /// 把Json字符串还原为对象 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="szJson"></param>
+        /// <returns></returns>
+        public static T ParseFormJson<T>(string szJson)
+        {
+            try
+            {
+                JsonSerializer jsonSerializer = new JsonSerializer();
+                StringReader strReader = new StringReader(szJson);
+                return (T)jsonSerializer.Deserialize(new JsonTextReader(strReader), typeof(T));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        #endregion
+
+
+        #region List<T>与Json互转
+
+        /// <summary>
+        /// 把List<T>序列化为Json字符串
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static string ListToJson<T>(T data)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(data.GetType());
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    serializer.WriteObject(ms, data);
+                    return Encoding.UTF8.GetString(ms.ToArray());
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static Object JsonToList(String json, Type t)
+        {
+            try
+            {
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(t);
+                using (MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(json)))
+                {
+                    return serializer.ReadObject(ms);
+                }
+            }
+            catch 
+            {
+
+                return null;
+            }
+        }
+
+
+        #endregion
 
 
 
