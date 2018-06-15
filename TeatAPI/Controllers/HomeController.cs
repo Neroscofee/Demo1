@@ -29,6 +29,7 @@ namespace TeatAPI.Controllers
 
         public ActionResult Welcome()
         {
+            string aa = "Nice";
             return View();
         }
     }
