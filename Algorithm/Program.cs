@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+                                                                            
 namespace Algorithm
 {
     class Program
@@ -12,7 +12,9 @@ namespace Algorithm
         {
             Sort s = new Sort();
             int[] array = { 3, 7, 4, 8, 1, 2, 9 };
-            //var t1 = Sort.QuickSort(array, 0, array.Length - 1);
+            //使用static修饰的方法可以不用实例化对象
+            var t1 = Sort.QuickSort(array, 0, array.Length - 1);
+
             var t2 = s.BubbleSort(array);
             int a = s.SimpleCut(38);
             

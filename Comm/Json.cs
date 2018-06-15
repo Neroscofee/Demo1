@@ -9,6 +9,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Comm
 {
@@ -279,7 +280,6 @@ namespace Comm
             }
             catch 
             {
-
                 return null;
             }
         }
@@ -287,6 +287,45 @@ namespace Comm
 
         #endregion
 
+
+        #region Json转DataTable
+        public static DataTable JsonToDataTable(string json,string name)
+        {
+            DataTable dt = new DataTable();
+            string message = "";
+            try
+            {
+                JObject jsonObj = JObject.Parse(json);
+                JToken[] arr = { };
+                JToken j = jsonObj[name];
+                arr = j.ToArray();
+                if (arr.Length>0)
+                {
+                    List<JToken> list = arr[0].ToList();
+                    foreach (JToken m in list)
+                    {
+                        dt.Columns.Add(((JProperty)m).Name);
+                    }
+                    //
+                    foreach (JToken jk in arr)
+                    {
+                        DataRow dr = dt.NewRow();
+                        List<JToken> listm = jk.ToList();
+                        foreach (JToken m in listm)
+                        {
+                            dr[((JProperty)m).Name] = m.First;
+                        }
+                        dt.Rows.Add(dr);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                message = ex.Message;
+            }
+            return dt;
+        }
+        #endregion
 
 
 

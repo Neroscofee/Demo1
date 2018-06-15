@@ -50,8 +50,11 @@ namespace Demo1
             zoo.Show(new Dog());
             zoo.Show(new Cat());
             zoo.Show(new Monkey());
-            
-            
+
+             
+
+
+
         }
 
         void BinaryTree()
@@ -97,6 +100,8 @@ namespace Demo1
             Console.WriteLine(tree.Name);
             tree.TraversalStack(ss);
             Console.ReadKey();
+
+
         }
 
     }

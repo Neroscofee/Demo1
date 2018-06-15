@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Diagnostics;
 using Newtonsoft.Json;
+using System.Data;
 
 namespace WeatherAPI
 {
@@ -26,6 +27,14 @@ namespace WeatherAPI
             parameters1.Add("format","");
             parameters1.Add("key", appkey);
             string result1 = sendPost(url1,parameters1,"GET");
+
+            string aaa = "{\"employees\": [{\"firstName\": \"John\",\"lastName\": \"Doe\"},{\"firstName\": \"Anna\",\"lastName\": \"Smith\"},{\"firstName\": \"Peter\",\"lastName\": \"Jones\"}]}";
+
+
+
+            DataTable dt = new DataTable();
+            dt = Comm.Json.JsonToDataTable(aaa, "employees");
+    
             //JsonObject newObj1 = new JsonObject(result1);
             JsonSerializer serializer = new JsonSerializer();
             StringReader sr = new StringReader(result1);
