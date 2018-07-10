@@ -52,10 +52,6 @@ namespace WeatherAPI
             
 
 
-
-
-
-
         }
 
         static string sendPost(string url,IDictionary<string,string> parameters,string method)
