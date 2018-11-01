@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace Algorithm
 {
+   
     public class Sort
     {
+        private string name;
+        private string newclass;
+        public string Name { get { return "xinyi"; } set { name = value; } }
+        public string Class { set { newclass = value; } }
+
+
         public static int[] QuickSort(int[] a, int left, int right)
         {
             if (left > right)
@@ -72,6 +79,7 @@ namespace Algorithm
             }
             return sum;
         }
+
 
     }
 }

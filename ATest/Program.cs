@@ -135,7 +135,7 @@ namespace ATest
             }
             Stopwatch st = new Stopwatch();
             st.Start();
-            using (SqlConnection conn = new SqlConnection("Data Source=;database=;user id=;pwd="))
+            using (SqlConnection conn = new SqlConnection("Data Source=47.104.245.127,36577;database=Neroscofee_Test;user id=sa;pwd=1234.asd"))
             {
                 conn.Open();
                 using (SqlBulkCopy bulkCopy = new SqlBulkCopy(conn))

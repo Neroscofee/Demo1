@@ -18,8 +18,20 @@ namespace Algorithm
 
             var t2 = s.BubbleSort(array);
             int a = s.SimpleCut(38);
-            PlayCard(5);
+            //PlayCard(5);
+            var tempName = s.Name;
+            s.Name = "xiaolan";
+            var tempName1 = s.Name;
 
+
+            s.Class = "一年级";
+            //var tempClass = s.Class;
+
+            Thermometer tp = new Thermometer(40);
+            tp.Temperature =50;
+
+            Console.WriteLine(tp.Temperature);
+            
 
             
 
@@ -140,16 +152,12 @@ namespace Algorithm
                 int num2 = item.Value;
                 //values.Add(num2);
 
-
-
             }
 
             for (int i = 0; i < newDic.Count; i++)
             {
                 values.Add(newDic[i+1]);
             }
-
-
 
 
             int a = 1;
@@ -162,14 +170,33 @@ namespace Algorithm
             }
 
             //Dictionary<int,int> 
-
+            Console.WriteLine(origin);
             Console.ReadKey();
 
 
         }
 
+        /*
+        public static void CreateSignal()
+        {
+            var dispatch_semaphore_create = "";
+            var dispatch_semaphore_wait = "";
+            var dispatch_semaphore_signal = "";
+            var dispatch_queue_t = "";
 
 
+            dispatch_semaphore_t semaphore = dispatch_semaphore_create(1);
+            dispatch_queue_t quene = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0);
+
+
+
+
+
+
+        }
+
+
+        */
 
     }
 }
